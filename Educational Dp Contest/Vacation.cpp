@@ -14,6 +14,7 @@ inline void fastio()
 }
 
 /*
+
 ll dp[100005][4];
 
 ll f(int i, int last, vector<array<int,3>> &a){
@@ -31,6 +32,7 @@ ll f(int i, int last, vector<array<int,3>> &a){
 
   return dp[i][last] = ans;
 }
+  
 */
 
 int main()
@@ -40,7 +42,7 @@ int main()
   int n;
   cin >> n;
 
-  vector<array<int, 3>> a(n);
+  vector<vector<ll>> a(n, vector<ll>(3, 0));
 
   for (int i = 0; i < n; i++)
     cin >> a[i][0] >> a[i][1] >> a[i][2];
@@ -49,25 +51,15 @@ int main()
   // cout << f(0, 3, a) << endl; // Initally No Task Selected = 3, tasks are 0, 1, 2
 
   // dp[i][last] = max happiness from day i to n-1
-  vector<vector<ll>> dp(n + 1, vector<ll>(4, INT_MIN));
+  vector<vector<ll>> dp(n + 1, vector<ll>(4, 0));
 
-  // Base
-  for (int last = 0; last < 4; last++)
-  {
-    dp[n][last] = 0LL;
-  }
-
-  for (int i = n - 1; i >= 0; i--)
-  {
-    for (int last = 0; last < 4; last++)
-    {
+  for (int i = n - 1; i >= 0; i--) {
+    for (int last = 0; last < 4; last++) {
 
       ll ans = 0;
 
-      for (int j = 0; j < 3; j++)
-      {
-        if (j == last)
-          continue;
+      for (int j = 0; j < 3; j++) {
+        if (j == last) continue;
 
         ans = max(ans, a[i][j] + dp[i + 1][j]);
       }
@@ -78,5 +70,5 @@ int main()
 
   cout << dp[0][3] << endl;
 
-      return 0;
+  return 0;
 }
