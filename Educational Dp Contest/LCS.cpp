@@ -7,8 +7,7 @@ using vi = vector<int>;
 using vll = vector<long long>;
 static const int MOD = 1e9 + 7;
 
-inline void fastio()
-{
+inline void fastio() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 }
@@ -35,8 +34,7 @@ int f(int i, int j, string &s, string &t)
 
 */
 
-int main()
-{
+int main() {
   fastio();
 
   string s, t;
@@ -57,10 +55,8 @@ int main()
   for (int j = 0; j <= m; j++)
     dp[0][j] = 0;
 
-  for (int i = 1; i <= n; i++)
-  {
-    for (int j = 1; j <= m; j++)
-    {
+  for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
 
       if (s[i - 1] == t[j - 1])
         dp[i][j] = 1 + dp[i - 1][j - 1];
@@ -74,17 +70,14 @@ int main()
   int idx = lcsLen;
   string lcs(lcsLen, '*');
 
-  while (i > 0 && j > 0)
-  {
+  while (i > 0 && j > 0) {
 
-      if (s[i - 1] == t[j - 1])
-      {
-        lcs[idx - 1] = s[i - 1];
-        idx--;
-        i--;
-        j--;
-      }
-    else if (dp[i - 1][j] > dp[i][j - 1])
+    if (s[i - 1] == t[j - 1]) {
+      lcs[idx - 1] = s[i - 1];
+      idx--;
+      i--;
+      j--;
+    } else if (dp[i - 1][j] > dp[i][j - 1])
       i--;
     else
       j--;

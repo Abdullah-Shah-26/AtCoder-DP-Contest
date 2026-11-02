@@ -7,14 +7,13 @@ using vi = vector<int>;
 using vll = vector<long long>;
 static const int MOD = 1e9 + 7;
 
-inline void fastio()
-{
+inline void fastio() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 }
 
 ll n, m;
-/* 
+/*
 ll dp[1001][1001];
 
 ll dfs(int i, int j, vector<vector<char>> &grid)
@@ -38,19 +37,15 @@ ll dfs(int i, int j, vector<vector<char>> &grid)
 }
 */
 
-
-int main()
-{
+int main() {
   fastio();
 
   cin >> n >> m;
 
   vector<vector<char>> grid(n, vector<char>(m, '.'));
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
       cin >> grid[i][j];
     }
   }
@@ -58,18 +53,19 @@ int main()
   // memset(dp, -1, sizeof(dp));
   // cout << dfs(0, 0, grid) << endl;
 
-  vector<vector<ll>> dp(n + 1, vector<ll> (m + 1, 0));
+  vector<vector<ll>> dp(n + 1, vector<ll>(m + 1, 0));
 
-  dp[n-1][m-1] = grid[n-1][m-1] == '.';
+  dp[n - 1][m - 1] = grid[n - 1][m - 1] == '.';
 
-  for(int i = n-1; i >= 0; i--){
-    for(int j = m-1; j >= 0; j--){
-      
-      if(grid[i][j] == '#') continue;
+  for (int i = n - 1; i >= 0; i--) {
+    for (int j = m - 1; j >= 0; j--) {
+
+      if (grid[i][j] == '#')
+        continue;
 
       // DAG Like Graph So No need of visited :)
-      dp[i][j] = (dp[i][j] + dp[i+1][j]) % MOD;
-      dp[i][j] = (dp[i][j] + dp[i][j+1]) % MOD;
+      dp[i][j] = (dp[i][j] + dp[i + 1][j]) % MOD;
+      dp[i][j] = (dp[i][j] + dp[i][j + 1]) % MOD;
     }
   }
 

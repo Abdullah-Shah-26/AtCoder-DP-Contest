@@ -7,8 +7,7 @@ using vi = vector<int>;
 using vll = vector<long long>;
 static const int MOD = 1e9 + 7;
 
-inline void fastio()
-{
+inline void fastio() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 }
@@ -32,11 +31,10 @@ ll f(int i, int last, vector<array<int,3>> &a){
 
   return dp[i][last] = ans;
 }
-  
+
 */
 
-int main()
-{
+int main() {
   fastio();
 
   int n;
@@ -48,7 +46,8 @@ int main()
     cin >> a[i][0] >> a[i][1] >> a[i][2];
 
   // memset(dp, -1, sizeof(dp));
-  // cout << f(0, 3, a) << endl; // Initally No Task Selected = 3, tasks are 0, 1, 2
+  // cout << f(0, 3, a) << endl; // Initally No Task Selected = 3, tasks are 0,
+  // 1, 2
 
   // dp[i][last] = max happiness from day i to n-1
   vector<vector<ll>> dp(n + 1, vector<ll>(4, 0));
@@ -59,7 +58,8 @@ int main()
       ll ans = 0;
 
       for (int j = 0; j < 3; j++) {
-        if (j == last) continue;
+        if (j == last)
+          continue;
 
         ans = max(ans, a[i][j] + dp[i + 1][j]);
       }
