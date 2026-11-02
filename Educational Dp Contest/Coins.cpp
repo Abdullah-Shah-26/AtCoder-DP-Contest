@@ -7,8 +7,7 @@ using vi = vector<int>;
 using vll = vector<long long>;
 static const int MOD = 1e9 + 7;
 
-inline void fastio()
-{
+inline void fastio() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 }
@@ -19,16 +18,18 @@ vector<double> p;
 double dp[3005][3005];
 bool vis[3005][3005];
 
-double f(int i, int heads)
-{
+double f(int i, int heads) {
 
-  if (i == n)
-  {
-    return heads > (n - heads); // If heads > Tails then prob of heads > prob of tails, return 1, valid way found
+  if (i == n) {
+    // If heads > Tails 
+    // Then prob of heads > prob of tails
+    // return 1, valid way found
+    return heads > (n - heads);
   }
 
   if (vis[i][heads])
     return dp[i][heads];
+    
   vis[i][heads] = true;
 
   double takeHead = p[i] * f(i + 1, heads + 1);
@@ -37,8 +38,7 @@ double f(int i, int heads)
   return dp[i][heads] = takeHead + takeTail;
 }
 
-int main()
-{
+int main() {
   fastio();
 
   cin >> n;
