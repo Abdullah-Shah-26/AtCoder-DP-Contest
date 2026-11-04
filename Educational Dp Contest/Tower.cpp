@@ -31,6 +31,13 @@ static const auto fastio = []() {
 (W + S) = blocks own wt + capacity it can carry
 blocks can be sorted in asc order based on this value
 
+maxS = 1e4
+maxW = 1e4
+
+1e4 + 1e4 = 2e4 > maxS 
+So we can never take those blocks 
+So the dimension for totalW can be safely taken as 2e4
+
 */
 
 const int N = 1001;
@@ -40,8 +47,13 @@ int n;
 vector<tuple<ll, ll, ll>> vec;
 ll dp[N][W];
 
+// totalW = sum of wt of blocks chosen from idx 0..i-1 (all valid, all kept above block i)
+
 ll f(int i, ll totalW) {
   if (i == n)
+    return 0;
+
+  if(totalW > 10000)
     return 0;
 
   if (dp[i][totalW] != -1)
