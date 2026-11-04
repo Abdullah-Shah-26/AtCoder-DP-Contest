@@ -30,6 +30,7 @@ int n;
 ll dp[45][4];
 
 // Grid : 2 x N
+// We can rotate tiles
 
 ll f(int i, int mask) {
   if (i == n)
@@ -52,27 +53,67 @@ ll f(int i, int mask) {
   // Both rows are empty
   else if (mask == 0) {
 
-    // Place vertical tile
+    // |
+    // |
+    // Place vertical tile (2 x 1)
+    // Covering both rows
     ans += f(i + 1, 0);
+
+    // ___ ___
+    // ___ ___
+    // Place vertical tiles horizontally
+    ans += f(i + 2, 0);
 
     // Place single L
 
+    // |
+    // |___
     // Both rows of cur col gets filled
     // Next col's bottom row also gets filled
     ans += f(i + 1, 1); // 01
 
+    // ____
+    // |
+    // |
     // Both rows of cur col gets filled
     // Next col's top row also gets filled
     ans += f(i + 1, 2); // 10
 
+    // Overcounting : Already covered below
+    //   ___
+    // |   |
+    // |__ |
     // Place 2 L's
-    // Both rows of cur & next col's gets filled
-    ans += f(i + 3, 0);
+    // Both rows of cur, cur + 1, cur + 2 col's gets filled
+    // ans += f(i + 3, 0);
   }
 
-  // 1 cell filled & other empty
-  // Place L
-  else {
+  // Bottom cell filled, top cell empty
+  else if (mask == 1) { // 01
+
+    // Place horiztontal tile
+    // Covers top cell of this & next col
+    ans += f(i + 1, 2); // 10
+
+    // Place L
+    // Covers the top cell & both rows of next col
+    // ___
+    //   |
+    //   |
+    ans += f(i + 2, 0);
+  }
+
+  // Top cell filled, bottom cell empty
+  else if (mask == 2) { // 10
+
+    // Place horizontal tile
+    // Covers next col bottom cell
+    ans += f(i + 1, 1);
+
+    // Place L
+    //    |
+    // ___|
+    // Covers both rows of cur & next col
     ans += f(i + 2, 0);
   }
 
