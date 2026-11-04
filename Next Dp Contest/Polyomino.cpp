@@ -30,7 +30,7 @@ int n;
 ll dp[45][4];
 
 // Grid : 2 x N
-// We can rotate tiles
+// Note : We can rotate tiles
 
 ll f(int i, int mask) {
   if (i == n)
